@@ -74,7 +74,7 @@ python ./tools/evaluate_depth_cityscapes_config.py args_files/args_cvnXt_H_citys
 The ground truth depth files can be found at [HERE](https://storage.googleapis.com/niantic-lon-static/research/manydepth/gt_depths_cityscapes.zip),
 Download this and unzip into `splits/cityscapes`.
 
-## Inference with your own iamges
+## Inference with your own images
 
 ```bash
 python test_simple_SQL_config.py ./conf/cvnXt.txt
