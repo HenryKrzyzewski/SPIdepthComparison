@@ -75,22 +75,19 @@ The ground truth depth files can be found at [HERE](https://storage.googleapis.c
 Download this and unzip into `splits/cityscapes`.
 
 ## Inference with your own images
-
 ```bash
 python test_simple_SQL_config.py ./conf/cvnXt.txt
 ```
+In `./conf/cvnXt.txt`, you can set `--image_path` to a single image or a directory of images.
 
 ## Citation
 If you find this project useful for your research, please consider citing:
 ~~~
-@misc{lavreniuk2024spidepthstrengthenedposeinformation,
+@article{lavreniuk2024spidepth,
       title={SPIdepth: Strengthened Pose Information for Self-supervised Monocular Depth Estimation}, 
       author={Mykola Lavreniuk},
       year={2024},
-      eprint={2404.12501},
-      archivePrefix={arXiv},
-      primaryClass={cs.CV},
-      url={https://arxiv.org/abs/2404.12501}, 
+      journal={arXiv preprint arXiv:2404.12501}
 }
 ~~~
 ## Acknowledgement
