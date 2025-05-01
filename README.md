@@ -1,4 +1,4 @@
-# SPIdepth: Strengthened Pose Information for Self-supervised Monocular Depth Estimation
+# [CVPR 2025] SPIdepth: Strengthened Pose Information for Self-supervised Monocular Depth Estimation
 
 </a> <a href='https://arxiv.org/abs/2404.12501'><img src='https://img.shields.io/badge/Paper-Arxiv-red'></a>
 
