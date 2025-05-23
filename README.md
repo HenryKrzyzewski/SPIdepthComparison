@@ -1,3 +1,17 @@
+![image](https://github.com/user-attachments/assets/9a49b07f-af45-419e-aa4b-b3763c5c2d31)Sample outputs on new inputs from the Middlebury stereo vision set. I only used the left image from each stereo set, and these images were NOT included as part of the training data for SPIdepth...
+
+Original images...
+![image](https://github.com/user-attachments/assets/c3c24a96-215b-499c-9a8c-301c41bacc60)
+![image](https://github.com/user-attachments/assets/6ce11f1f-3595-4a45-9524-fedd1bed5639)
+![image](https://github.com/user-attachments/assets/99f496c6-726a-4e83-b8a6-30e677a6be97)
+
+Depth images using SPIdepth...
+![image](https://github.com/user-attachments/assets/e05dbf66-48ce-4c48-b9ff-434efe3716a4)
+![image](https://github.com/user-attachments/assets/3dc3bd92-da31-480c-baa0-8f718c8b7a3c)
+![Uploading image.png…]()
+
+Below is the original README...
+
 # [CVPR 2025] SPIdepth: Strengthened Pose Information for Self-supervised Monocular Depth Estimation
 
 </a> <a href='https://arxiv.org/abs/2404.12501'><img src='https://img.shields.io/badge/Paper-Arxiv-red'></a>
