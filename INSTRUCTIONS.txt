@@ -1,0 +1,8 @@
+To get the code running I followed the steps below...
+
+1.) Create a virtual environment to have no dependency conflicts for required packages.
+2.) Activate the environment and run the command "python -m pip install -r requirements.txt".
+3.) There are images in the datasets folder. In order to run the SPIdepth model, you must alter the cvnXt.txt file with the image path from an image from the dataset folder.
+4.) Run the command "python test_simple_SQL_config.py ./conf/cvnXt.txt" from the SPIdepth directory. This will take a few seconds but it will output a .jpeg file in the same folder as the source image is from.
+5.) If you want to perform SGBM stereo vision you can use the stereo dataset in datasets/dataset. To do this, go to the stereo directory and run python main.py with the file path of the stereo image FOLDER.
+6.) For example, while in the stereo directory, run "python main.py /home/krzyzehj/work/final_project/SPIdepth/datasets/data/artroom1". This will place the stereo output in the stereo/output folder.
