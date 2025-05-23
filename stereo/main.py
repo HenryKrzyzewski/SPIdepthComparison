@@ -7,6 +7,8 @@ import os
 
 class DepthMap:
 
+    #class to perform stereo vision
+
     def __init__(self, img_size, baseline, fx, fy, cx, cy, fov, window_size=7, min_disp=0, num_disp=35):
         
         block_size = window_size
@@ -19,6 +21,7 @@ class DepthMap:
         self.cy = cy
         self.fov = fov
 
+        #intrinsic matrix
         self.K = np.array([[fx, 0, cx],
                             [0, fy, cy],
                             [0, 0, 1]])
@@ -29,6 +32,7 @@ class DepthMap:
             self.K, None, self.K, None, img_size, R, T
         )
 
+        #openCV SGBM object
         self.stereo = cv.StereoSGBM.create(
             minDisparity=min_disp,
             numDisparities=16*num_disp-min_disp,
@@ -42,7 +46,8 @@ class DepthMap:
             preFilterCap=63,
             mode=cv.STEREO_SGBM_MODE_SGBM_3WAY
         )
-    
+
+    #image rectification if necessary
     def rectify(self):
         map1_x, map1_y = cv.initUndistortRectifyMap(self.K, None, self.R1, self.P1, self.img_size, cv.CV_32FC1)
         map2_x, map2_y = cv.initUndistortRectifyMap(self.K, None, self.R2, self.P2, self.img_size, cv.CV_32FC1)
@@ -53,6 +58,7 @@ class DepthMap:
         self.imgLeft = rectified_left
         self.imgReft = rectified_right
 
+    #computes disparity between two images
     def disparity(self):
         disparity = self.stereo.compute(self.imgLeft, self.imgRight)    
         disparity[disparity == 0] = 1
@@ -62,6 +68,7 @@ class DepthMap:
         self.disparityMapVis = disparity_normalized
         self.disparityMap = disparity
 
+    #computes the depth from the actual disparity
     def depth(self):
         self.disparity_actual = self.disparityMap.astype(np.float32) * (self.stereo.getNumDisparities() / 255.0)
 
@@ -88,7 +95,8 @@ class DepthMap:
         left_cam_robot_frame = np.array([0.28, 0.081, 0.131])
         self.points = (transform @ points_camera_frame_unraveled).T + left_cam_robot_frame
         self.variances = np.squeeze(var_unraveled)
-    
+
+    #computes the variance of the depth estimations
     def variance(self):
         # disparity_actual = self.disparityMap.astype(np.float32) * (self.stereo.getNumDisparities() / 255.0)
 
@@ -104,6 +112,7 @@ class DepthMap:
         sigma_Z2[0:700, :] = np.inf
         self.varianceMap = sigma_Z2
 
+    #calls each of the above functions in the corresponding order on the left and right images and saves the output to the path
     def compute(self, imgLeft, imgRight, path):
         # self.imgLeft = cv.imread(imgLeft, cv.IMREAD_GRAYSCALE)
         # self.imgRight = cv.imread(imgRight, cv.IMREAD_GRAYSCALE)
@@ -119,7 +128,8 @@ class DepthMap:
         output_path = os.path.join("/home/krzyzehj/work/final_project/SPIdepth/stereo/output", os.path.basename(path) + "_output.png")
         cv.imwrite(output_path, self.disparityMapVis)
 
-        
+
+#reads calibration.txt file for parameters
 def read_calibration_file(filepath):
     calibration = {}
 
@@ -145,7 +155,8 @@ def read_calibration_file(filepath):
                     calibration[key] = value  # fallback in case of string
 
     return calibration
-    
+
+#opens filepaths to be read and used
 def main(args):
     folder_path = args[1]
     try:            
